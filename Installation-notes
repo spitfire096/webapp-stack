@@ -1,0 +1,131 @@
+# Installation Notes for Web Application Stack Services
+
+## 1. **MySQL Installation**
+
+### On CentOS Stream 9:
+1. **Install MySQL repository:**
+   ```bash
+   sudo dnf install https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+   ```
+2. **Install MySQL server:**
+   ```bash
+   sudo dnf install mariadb-server
+   ```
+3. **Start MySQL service:**
+   ```bash
+   sudo systemctl start mariadb
+   ```
+4. **Enable MySQL to start on boot:**
+   ```bash
+   sudo systemctl enable mysqld
+   ```
+5. **Secure MySQL installation:**
+   ```bash
+   sudo mysql_secure_installation
+   ```
+
+## 2. **Memcached Installation**
+
+### On CentOS Stream 9:
+1. **Install Memcached:**
+   ```bash
+   sudo dnf install memcached
+   ```
+2. **Start Memcached service:**
+   ```bash
+   sudo systemctl start memcached
+   ```
+3. **Enable Memcached to start on boot:**
+   ```bash
+   sudo systemctl enable memcached
+   ```
+4. **Optional: Configure Memcached settings** (e.g., memory usage, ports) in `/etc/sysconfig/memcached`.
+
+## 3. **RabbitMQ Installation**
+
+### On CentOS Stream 9:
+1. **Enable the EPEL repository:**
+   ```bash
+   sudo dnf install epel-release
+   ```
+2. **Install Erlang (RabbitMQ dependency):**
+   ```bash
+   sudo dnf install erlang
+   ```
+3. **Download and install RabbitMQ:**
+   ```bash
+   sudo dnf install https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.11.9/rabbitmq-server-3.11.9-1.el9.noarch.rpm
+   ```
+4. **Start RabbitMQ service:**
+   ```bash
+   sudo systemctl start rabbitmq-server
+   ```
+5. **Enable RabbitMQ to start on boot:**
+   ```bash
+   sudo systemctl enable rabbitmq-server
+   ```
+6. **Enable RabbitMQ management plugin:**
+   ```bash
+   sudo rabbitmq-plugins enable rabbitmq_management
+   ```
+7. **Access RabbitMQ management UI** via `http://<ip>:15672`. Default credentials: `guest/guest` (change these in production).
+
+## 4. **Tomcat Installation**
+
+### On CentOS Stream 9:
+1. **Install OpenJDK (Java):**
+   ```bash
+   sudo dnf install java-11-openjdk-devel
+   ```
+2. **Download Apache Tomcat:**
+   ```bash
+   wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
+   ```
+3. **Extract the archive:**
+   ```bash
+   tar -xvzf apache-tomcat-9.0.74.tar.gz -C /opt
+   ```
+4. **Create a symbolic link:**
+   ```bash
+   sudo ln -s /opt/apache-tomcat-9.0.74 /opt/tomcat
+   ```
+5. **Start Tomcat:**
+   ```bash
+   /opt/tomcat/bin/startup.sh
+   ```
+6. **Access Tomcat UI** via `http://<ip>:8080`.
+
+## 5. **Nginx Installation**
+
+### On Ubuntu 22.04 (Jammy):
+1. **Update the package list:**
+   ```bash
+   sudo apt update
+   ```
+2. **Install Nginx:**
+   ```bash
+   sudo apt install nginx
+   ```
+3. **Start Nginx service:**
+   ```bash
+   sudo systemctl start nginx
+   ```
+4. **Enable Nginx to start on boot:**
+   ```bash
+   sudo systemctl enable nginx
+   ```
+5. **Test Nginx:**
+   - Open a browser and navigate to `http://<ip>`.
+
+---
+
+## Additional Notes:
+
+- Ensure ports used by these services are open in the VM firewall:
+  ```bash
+  sudo firewall-cmd --permanent --add-port=<port_number>/tcp
+  sudo firewall-cmd --reload
+  ```
+- Replace `<ip>` with the private network IP of the respective VM.
+- Customize configuration files for each service to match your application requirements.
+
