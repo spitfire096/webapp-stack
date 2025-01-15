@@ -39,7 +39,7 @@ Ensure the following are installed on your host machine:
 ### Step 1: Clone the Repository
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-repository/web-stack-setup.git
+$ git clone https://github.com/spitfire096/webapp-stack.git
 $ cd web-stack-setup
 ```
 
