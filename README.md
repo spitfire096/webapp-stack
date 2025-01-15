@@ -59,11 +59,11 @@ $ vagrant status
 ```
 
 ### Step 5: Access Services
-- **MySQL**: `192.168.56.15`
-- **Memcached**: `192.168.56.14`
-- **RabbitMQ**: `192.168.56.13`
-- **Tomcat**: `192.168.56.12`
-- **Nginx**: `192.168.56.11`
+- **MySQL**: `192.168.56.x`
+- **Memcached**: `192.168.56.x`
+- **RabbitMQ**: `192.168.56.x`
+- **Tomcat**: `192.168.56.x`
+- **Nginx**: `192.168.56.x`
 
 ### Step 6: SSH into VMs (Optional)
 ```bash
